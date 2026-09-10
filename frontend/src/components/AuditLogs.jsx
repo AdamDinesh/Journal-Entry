@@ -1,4 +1,4 @@
-import { formatDate } from '../utils/helper';
+import { formatDateTime } from '../utils/helper';
 export default function AuditLogs({ auditLogs }) {
     return (<div className="bg-white p-5 rounded-xl border border-gray-200">
         <h2 className="text-base font-medium mb-3.5">Audit log</h2>
@@ -12,7 +12,7 @@ export default function AuditLogs({ auditLogs }) {
                         <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-1.5 flex-shrink-0" />
                         <div>
                             <p className="font-medium">{log.Action}</p>
-                            <p className="text-xs text-gray-400 mt-0.5">{formatDate(log.CreatedAt)} | {log.Details}</p>
+                            <p className="text-xs text-gray-400 mt-0.5">{formatDateTime(log.CreatedAt)} | {log.Details}</p>
                         </div>
                     </li>
                 ))}

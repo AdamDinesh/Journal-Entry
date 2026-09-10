@@ -1,3 +1,4 @@
+import { formatAmount } from "../utils/helper"
 function JournalEntryLine({ lines, totalDebit, totalCredit }) {
   return (<div className="bg-white p-5 rounded-xl border border-gray-200">
     <h2 className="text-base font-medium mb-3.5">Journal Entry Lines</h2>
@@ -15,10 +16,10 @@ function JournalEntryLine({ lines, totalDebit, totalCredit }) {
             <tr key={line.LineId} className="border-b border-gray-100 last:border-0">
               <td className="py-2">{line.AccountName}</td>
               <td className="py-2 text-right">
-                {line.LineType === 'DEBIT' ? line.Amount : '-'}
+                {line.LineType === 'DEBIT' ? formatAmount(line.Amount) : '-'}
               </td>
               <td className="py-2 text-right">
-                {line.LineType === 'CREDIT' ? line.Amount : '-'}
+                {line.LineType === 'CREDIT' ? formatAmount(line.Amount) : '-'}
               </td>
             </tr>
           ))}
@@ -26,8 +27,8 @@ function JournalEntryLine({ lines, totalDebit, totalCredit }) {
         <tfoot>
           <tr className="border-t border-gray-200 font-medium">
             <td className="py-2">Total</td>
-            <td className="py-2 text-right">{totalDebit}</td>
-            <td className="py-2 text-right">{totalCredit}</td>
+            <td className="py-2 text-right">{formatAmount(totalDebit)}</td>
+            <td className="py-2 text-right">{formatAmount(totalCredit)}</td>
           </tr>
         </tfoot>
       </table>

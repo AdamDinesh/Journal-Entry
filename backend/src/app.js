@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const hpp = require('hpp');
 const morgan = require('morgan');
-// const rateLimit = require('express-rate-limit');
+const rateLimit = require('express-rate-limit');
 
 const accountsRoutes = require('./routes/accounts.routes');
 const journalEntriesRoutes = require('./routes/journalEntries.routes');
@@ -25,10 +25,12 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 
-// const rateLimiter = rateLimit({
-//     windowMs: 60 * 1000,
-//     max: 100,
-// });
+const rateLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 100,
+});
+
+
 app.get('/', (req, res) => {
     res.json({
         status: 'ok',
@@ -36,9 +38,9 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/api/health', healthCheck);
-app.use('/api/accounts', accountsRoutes);
-app.use('/api/journal-entries', journalEntriesRoutes);
+app.get('/api/health', rateLimiter, healthCheck);
+app.use('/api/accounts', rateLimiter, accountsRoutes);
+app.use('/api/journal-entries', rateLimiter, journalEntriesRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ status: 'error', message: 'Route not found' });

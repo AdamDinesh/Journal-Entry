@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { formatDate } from '../utils/helper';
+import { formatDate, formatDateTime, formatAmount } from '../utils/helper';
 
 function JournalEntryTable({ entries, filtersActive }) {
   const navigate = useNavigate();
@@ -41,8 +41,8 @@ function JournalEntryTable({ entries, filtersActive }) {
               key={entry.JournalEntryId}
               onClick={() => navigate(`/journal-entries/${entry.JournalEntryId}`)}
               className={`cursor-pointer border border-gray-300 text-gray-800 ${index % 2 === 0
-                  ? "bg-white hover:bg-gray-50"
-                  : "bg-[#f9f9f9] hover:bg-[#DDEFF1]"
+                ? "bg-white hover:bg-gray-50"
+                : "bg-[#f9f9f9] hover:bg-[#DDEFF1]"
                 }`}
             >
               <td className="p-3 border border-gray-300 font-mono text-gray-700">
@@ -58,15 +58,15 @@ function JournalEntryTable({ entries, filtersActive }) {
               </td>
 
               <td className="p-3 border border-gray-300 font-mono">
-                {entry.TotalDebit}
+                {formatAmount(entry.TotalDebit)}
               </td>
 
               <td className="p-3 border border-gray-300 font-mono">
-                {entry.TotalCredit}
+                {formatAmount(entry.TotalCredit)}
               </td>
 
               <td className="p-3 border border-gray-300 text-gray-500">
-                {formatDate(entry.CreatedAt)}
+                {formatDateTime(entry.CreatedAt)}
               </td>
             </tr>
           ))}

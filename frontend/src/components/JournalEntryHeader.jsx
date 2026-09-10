@@ -1,4 +1,4 @@
-import { formatDate } from '../utils/helper';
+import { formatDate, formatDateTime, formatAmount } from '../utils/helper';
 
 export default function JournalEntryHeader({ entry }) {
     const isBalanced = entry.TotalDebit === entry.TotalCredit;
@@ -16,10 +16,10 @@ export default function JournalEntryHeader({ entry }) {
                 <span>{entry.Narration || '—'}</span>
 
                 <span className="text-gray-500">Total debit</span>
-                <span className="font-medium">{entry.TotalDebit}</span>
+                <span className="font-medium">{formatAmount(entry.TotalDebit)}</span>
 
                 <span className="text-gray-500">Total credit</span>
-                <span className="font-medium">{entry.TotalCredit}</span>
+                <span className="font-medium">{formatAmount(entry.TotalCredit)}</span>
 
                 <span className="text-gray-500">Balanced</span>
                 <span>
@@ -31,7 +31,7 @@ export default function JournalEntryHeader({ entry }) {
                 </span>
 
                 <span className="text-gray-500">Created</span>
-                <span>{formatDate(entry.CreatedAt)}</span>
+                <span>{formatDateTime(entry.CreatedAt)}</span>
             </div>
         </div>
     )
