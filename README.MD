@@ -171,7 +171,7 @@ npm install
 ```
 
 Create a `.env` file using `.env.example`:
-
+```
 PORT=5000
 NODE_ENV=development
 DB_SERVER=your-server.database.windows.net
@@ -179,7 +179,7 @@ DB_DATABASE=your-database-name
 DB_USER=your-database-user
 DB_PASSWORD=your-database-password
 FRONTEND_URL=http://localhost:5173
-
+```
 Do not commit real database credentials.
 
 ### Database Setup
