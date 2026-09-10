@@ -5,8 +5,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 // const rateLimit = require('express-rate-limit');
 
-// const paymentsRoutes = require('./routes/payments.routes');
-// const webhooksRoutes = require('./routes/webhooks.routes');
+const accountsRoutes = require('./routes/accounts.routes');
+const journalEntriesRoutes = require('./routes/journalEntries.routes');
+
 const healthCheck = require('./controllers/health.controller');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -39,9 +40,9 @@ app.get('/', (req, res) => {
     });
 });
 
- app.get('/api/health', healthCheck);
-// app.use('/api/payments', rateLimiter, paymentsRoutes);
-// app.use('/api/webhooks', rateLimiter, webhooksRoutes);
+app.get('/api/health', healthCheck);
+app.use('/api/accounts', accountsRoutes);
+app.use('/api/journal-entries', journalEntriesRoutes);
 
 app.use((req, res) => {
     res.status(404).json({ status: 'error', message: 'Route not found' });
