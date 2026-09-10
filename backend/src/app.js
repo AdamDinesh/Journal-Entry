@@ -1,7 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
-// const hpp = require('hpp');
+const hpp = require('hpp');
 const morgan = require('morgan');
 // const rateLimit = require('express-rate-limit');
 
@@ -15,19 +15,15 @@ const app = express();
 
 app.use(helmet());
 
-// app.use(cors({
-//     origin: process.env.FRONTEND_URL
-// }));
+app.use(cors({
+    origin: process.env.FRONTEND_URL
+}));
 
-// app.use(hpp());
+app.use(hpp());
 
 app.use(morgan('dev'));
 
-app.use(express.json({
-    verify: (req, res, buf) => {
-        req.rawBody = buf;
-    }
-}));
+app.use(express.json());
 
 // const rateLimiter = rateLimit({
 //     windowMs: 60 * 1000,
